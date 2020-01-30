@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
-export * from './platform-util';
-export * from './type-util';
-export * from './sanitize-svg';
-export * from './number-util';
-export * from './compare-util';
-export * from './zone-scheduler';
-export * from './stringify';
-export * from './color-util';
+import { SafeStyle } from '@angular/platform-browser';
+
+/**
+ * @internal
+ * Interface for the radial chart render data,
+ * i.e. all the data needed for creating the svg path
+ * and additional information like alternative text.
+ */
+export interface DtRadialChartRenderData {
+  name: string;
+  path: string;
+  color: string;
+  colorCustomProp: SafeStyle;
+  value: number;
+  ariaLabel: string;
+}

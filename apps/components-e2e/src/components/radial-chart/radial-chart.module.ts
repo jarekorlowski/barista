@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-export * from './platform-util';
-export * from './type-util';
-export * from './sanitize-svg';
-export * from './number-util';
-export * from './compare-util';
-export * from './zone-scheduler';
-export * from './stringify';
-export * from './color-util';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { Route, RouterModule } from '@angular/router';
+import { DtRadialChartModule } from '@dynatrace/barista-components/radial-chart';
+import { DtE2ERadialChart } from './radial-chart';
+
+const routes: Route[] = [{ path: '', component: DtE2ERadialChart }];
+
+@NgModule({
+  declarations: [DtE2ERadialChart],
+  imports: [CommonModule, RouterModule.forChild(routes), DtRadialChartModule],
+  exports: [],
+  providers: [],
+})
+export class DtE2ERadialChartModule {}
