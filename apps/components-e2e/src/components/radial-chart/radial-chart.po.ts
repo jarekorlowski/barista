@@ -17,7 +17,6 @@
 import { Selector } from 'testcafe';
 
 export const body = Selector('body');
-export const radialChart = Selector('#test-radial-chart');
 export const chartTypePie = Selector('#chart-type-pie');
 export const chartTypeDonut = Selector('#chart-type-donut');
 export const overlay = Selector('.dt-overlay-container');

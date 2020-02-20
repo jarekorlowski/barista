@@ -15,13 +15,7 @@
  */
 
 import { resetWindowSizeToDefault, waitForAngular } from '../../utils';
-import {
-  body,
-  chartTypeDonut,
-  chartTypePie,
-  overlay,
-  radialChart,
-} from './radial-chart.po';
+import { body, chartTypeDonut, chartTypePie, overlay } from './radial-chart.po';
 
 fixture('Radial chart')
   .page('http://localhost:4200/radial-chart')
@@ -32,46 +26,46 @@ fixture('Radial chart')
 
 test('should show overlay on hover', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
+    .hover(body, { speed: 0.1, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok()
     .expect(overlay.textContent)
     .match(/Chrome: 43 of 89/)
-    .hover(body, { speed: 0.3, offsetX: 10, offsetY: 10 })
+    .hover(body, { speed: 0.1, offsetX: 10, offsetY: 10 })
     .expect(overlay.exists)
     .notOk();
 });
 
 test('should show correct overlays when switching from pie to donut chart and back', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
+    .hover(body, { speed: 0.1, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok()
     .click(chartTypeDonut)
-    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
+    .hover(body, { speed: 0.1, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .notOk()
-    .hover(radialChart, { speed: 0.3, offsetX: 650, offsetY: 255 })
+    .hover(body, { speed: 0.1, offsetX: 650, offsetY: 255 })
     .expect(overlay.exists)
     .ok()
     .click(chartTypePie)
-    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
+    .hover(body, { speed: 0.1, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok();
 });
 
 test('should show correct overlay contents when hovering over pies', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
+    .hover(body, { speed: 0.1, offsetX: 475, offsetY: 280 })
     .expect(overlay.textContent)
     .match(/Chrome: 43 of 89/)
-    .hover(radialChart, { speed: 0.3, offsetX: 270, offsetY: 480 })
+    .hover(body, { speed: 0.1, offsetX: 270, offsetY: 480 })
     .expect(overlay.textContent)
     .match(/Safari: 22 of 89/)
-    .hover(radialChart, { speed: 0.3, offsetX: 150, offsetY: 270 })
+    .hover(body, { speed: 0.1, offsetX: 150, offsetY: 270 })
     .expect(overlay.textContent)
     .match(/Firefox: 15 of 89/)
-    .hover(radialChart, { speed: 0.3, offsetX: 280, offsetY: 125 })
+    .hover(body, { speed: 0.1, offsetX: 280, offsetY: 125 })
     .expect(overlay.textContent)
     .match(/Microsoft Edge: 9 of 89/);
 });
