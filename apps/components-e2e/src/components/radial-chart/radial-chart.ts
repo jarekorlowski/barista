@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'dt-e2e-radial-chart',
   templateUrl: 'radial-chart.html',
+  styles: ['.dt-radial-chart ::ng-deep svg { max-width: 700px; }'],
 })
 export class DtE2ERadialChart {
   type: 'pie' | 'donut' = 'pie';

@@ -32,7 +32,7 @@ fixture('Radial chart')
 
 test('should show overlay on hover', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.3, offsetX: 500, offsetY: 100 })
+    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok()
     .expect(overlay.textContent)
@@ -42,33 +42,36 @@ test('should show overlay on hover', async (testController: TestController) => {
     .notOk();
 });
 
-test('should not show an overlay in the middle of the circle when the chart type has been changed to a donut chart', async (testController: TestController) => {
+test('should show correct overlays when switching from pie to donut chart and back', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.3, offsetX: 600, offsetY: 300 })
+    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok()
     .click(chartTypeDonut)
-    .hover(radialChart, { speed: 0.3, offsetX: 600, offsetY: 300 })
+    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .notOk()
+    .hover(radialChart, { speed: 0.3, offsetX: 650, offsetY: 255 })
+    .expect(overlay.exists)
+    .ok()
     .click(chartTypePie)
-    .hover(radialChart, { speed: 0.3, offsetX: 600, offsetY: 300 })
+    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
     .expect(overlay.exists)
     .ok();
 });
 
 test('should show correct overlay contents when hovering over pies', async (testController: TestController) => {
   await testController
-    .hover(radialChart, { speed: 0.2, offsetX: 580, offsetY: 500 })
+    .hover(radialChart, { speed: 0.3, offsetX: 475, offsetY: 280 })
     .expect(overlay.textContent)
     .match(/Chrome: 43 of 89/)
-    .hover(radialChart, { speed: 0.2, offsetX: 375, offsetY: 560 })
+    .hover(radialChart, { speed: 0.3, offsetX: 270, offsetY: 480 })
     .expect(overlay.textContent)
     .match(/Safari: 22 of 89/)
-    .hover(radialChart, { speed: 0.2, offsetX: 190, offsetY: 350 })
+    .hover(radialChart, { speed: 0.3, offsetX: 150, offsetY: 270 })
     .expect(overlay.textContent)
     .match(/Firefox: 15 of 89/)
-    .hover(radialChart, { speed: 0.2, offsetX: 370, offsetY: 150 })
+    .hover(radialChart, { speed: 0.3, offsetX: 280, offsetY: 125 })
     .expect(overlay.textContent)
     .match(/Microsoft Edge: 9 of 89/);
 });
