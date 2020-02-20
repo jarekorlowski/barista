@@ -15,20 +15,21 @@
  */
 
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { Platform } from '@angular/cdk/platform';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ContentChildren,
+  Directive,
   ElementRef,
   Input,
   OnDestroy,
   QueryList,
-  ViewEncapsulation,
-  Directive,
   TemplateRef,
-  ContentChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DT_CHART_COLOR_PALETTE_ORDERED } from '@dynatrace/barista-components/chart';
@@ -36,6 +37,7 @@ import { isNumber } from '@dynatrace/barista-components/core';
 import { PieArcDatum } from 'd3-shape';
 import { combineLatest, of, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { DtRadialChartOverlayData } from './radial-chart-path';
 import { DtRadialChartSeries } from './radial-chart-series';
 import { DtRadialChartRenderData } from './utils/radial-chart-interfaces';
 import {
@@ -43,7 +45,6 @@ import {
   generatePieArcData,
   getSum,
 } from './utils/radial-chart-utils';
-import { DtRadialChartOverlayData } from './radial-chart-path';
 
 /** Size of the inner (empty) circle in proportion to the circle's radius. */
 const DONUT_INNER_CIRCLE_FRACTION = 0.8;
@@ -168,35 +169,38 @@ export class DtRadialChart implements AfterContentInit, OnDestroy {
     private _elementRef: ElementRef<HTMLElement>,
     private _changeDetectorRef: ChangeDetectorRef,
     private _sanitizer: DomSanitizer,
+    private _platform: Platform,
   ) {}
 
   /** AfterContentInit hook */
   ngAfterContentInit(): void {
-    /**
-     * Initially set the width of the SVG to the available width
-     * to calculate the radius and the viewbox.
-     */
-    this._width = this._elementRef.nativeElement.getBoundingClientRect().width;
-    this._updateRenderData();
+    if (this._platform.isBrowser) {
+      /**
+       * Initially set the width of the SVG to the available width
+       * to calculate the radius and the viewbox.
+       */
+      this._width = this._elementRef.nativeElement.getBoundingClientRect().width;
+      this._updateRenderData();
 
-    /**
-     * Fires every time a value within one of the series changes
-     * or the series data itself gets an update (one series is added or removed).
-     */
-    this._radialChartSeries.changes
-      .pipe(
-        switchMap(() =>
-          this._radialChartSeries.length
-            ? combineLatest(
-                this._radialChartSeries.map(series => series._stateChanges),
-              )
-            : of(null),
-        ),
-        takeUntil(this._destroy$),
-      )
-      .subscribe((): void => {
-        this._updateRenderData();
-      });
+      /**
+       * Fires every time a value within one of the series changes
+       * or the series data itself gets an update (one series is added or removed).
+       */
+      this._radialChartSeries.changes
+        .pipe(
+          switchMap(() =>
+            this._radialChartSeries.length
+              ? combineLatest(
+                  this._radialChartSeries.map(series => series._stateChanges),
+                )
+              : of(null),
+          ),
+          takeUntil(this._destroy$),
+        )
+        .subscribe((): void => {
+          this._updateRenderData();
+        });
+    }
   }
 
   /** OnDestroy hook */
