@@ -20,3 +20,10 @@ export const body = Selector('body');
 export const chartTypePie = Selector('#chart-type-pie');
 export const chartTypeDonut = Selector('#chart-type-donut');
 export const overlay = Selector('.dt-overlay-container');
+
+export const pieChrome = Selector('.dt-radial-chart-series-group:nth-child(1)');
+export const pieSafari = Selector('.dt-radial-chart-series-group:nth-child(2)');
+export const pieFirefox = Selector(
+  '.dt-radial-chart-series-group:nth-child(3)',
+);
+export const pieEdge = Selector('.dt-radial-chart-series-group:nth-child(4)');
