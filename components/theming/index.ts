@@ -17,3 +17,4 @@
 export * from './src/theming-module';
 export * from './src/theme';
 export * from './src/colors';
+export * from './src/chart-colors';

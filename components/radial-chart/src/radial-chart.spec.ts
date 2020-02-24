@@ -19,7 +19,7 @@
 
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DT_CHART_COLOR_PALETTE_ORDERED } from '@dynatrace/barista-components/chart';
+import { DT_CHART_COLOR_PALETTE_ORDERED } from '@dynatrace/barista-components/theming';
 import {
   DtRadialChartModule,
   DtRadialChartSeries,

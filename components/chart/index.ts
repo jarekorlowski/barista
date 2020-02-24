@@ -16,7 +16,6 @@
 
 export * from './src/chart-module';
 export * from './src/chart';
-export * from './src/chart-colors';
 export * from './src/chart-config';
 export * from './src/heatfield/index';
 export * from './src/tooltip/chart-tooltip';
@@ -27,6 +26,10 @@ export {
 
 export { DtChartRange } from './src/range/range';
 export { DtChartTimestamp } from './src/timestamp/timestamp';
-export { DtChartSelectionAreaAction } from './src/selection-area/overlay-action';
+export {
+  DtChartSelectionAreaAction,
+} from './src/selection-area/overlay-action';
 
-export { DtChartSelectionArea as _DtChartSelectionArea } from './src/selection-area/selection-area';
+export {
+  DtChartSelectionArea as _DtChartSelectionArea,
+} from './src/selection-area/selection-area';

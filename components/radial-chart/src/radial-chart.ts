@@ -32,7 +32,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { DT_CHART_COLOR_PALETTE_ORDERED } from '@dynatrace/barista-components/chart';
+import { DT_CHART_COLOR_PALETTE_ORDERED } from '@dynatrace/barista-components/theming';
 import { isNumber } from '@dynatrace/barista-components/core';
 import { PieArcDatum } from 'd3-shape';
 import { combineLatest, of, Subject } from 'rxjs';
